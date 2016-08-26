@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Close5 Code Challenge</title>
+    <link href="stylesheets/styles.css" rel="stylesheet">
+  </head>
+  <body>
+    <h1>Close5 Code Challenge</h1>
+    <div>
+      <h4>Endpoints:</h4>
+      <span id="userCoords"></span>
+      <table>
+        <thead>
+          <tr>
+            <th>Endpoint</th>
+            <th>Description</th>
+            <th>Query Parameters</th>
+            <th>Example</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>/items</td>
+            <td>
+              GET a list of all items sorted per query parameters.<br>
+              Note: Multiple sort queries are executed in the order provided.
+            </td>
+            <td>
+              {sort field}={sort order (1 or -1)} Optional
+            </td>
+            <td>
+              localhost:8080/items/?createdAt=-1&price=1<br>
+              All items sorted first by descending creation date, then by ascending price
+            </td>
+          </tr>
+          <tr>
+            <td>/item/:id</td>
+            <td>GET one item with specified 'id'</td>
+            <td>None</td>
+            <td>localhost:8080/item/53fb8f81456e74467b000002</td>
+          </tr>
+          <tr>
+            <td>/users/:userId/items</td>
+            <td>GET a list of items with specified 'userId'</td>
+            <td>{sort field}={sort order (1 or -1)} Optional</td>
+            <td>localhost:8080/users/53f6c9c96d1944af0b00000b/items?createdAt=1&price=-1</td>
+          </tr>
+          <tr>
+            <td>/nearby</td>
+            <td>GET a list of items within 50 miles of specified location</td>
+            <td>
+              {lat}={user lat} Required <br>
+              {lng}={user lng} Required <br>
+              {sort field}={sort order (1 or -1)} Optional
+            </td>
+            <td>localhost:8080/nearby?lat=36&lng=-115&price=-1</td>
+          </tr>
+        </tbody>
+
+      </table>
+    </div>
+    <script type="text/javascript">
+      var coordText;
+      navigator.geolocation.getCurrentPosition(function(location){
+        var userLat = location.coords.latitude,
+            userLng = location.coords.longitude;
+        coordText = document.createTextNode('Your current latitude = ' + userLat + ', longitude = ' + userLng);
+        document.getElementById('userCoords').appendChild(coordText);
+      }, function(err) {
+        coordText = document.createTextNode("You have denied access to geolocation information, so your current coordinates cannot be provided.");
+        document.getElementById('userCoords').appendChild(coordText);
+      });
+
+    </script>
+  </body>
+</html>
