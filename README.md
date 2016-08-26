@@ -1,7 +1,7 @@
 Instructions:
-1. npm install --production
-2. npm start or node app (note: 'node' app starts silently, no console notification)
-3. Point browser to localhost:8080
+ 1. npm install --production
+ 2. npm start or node app (note: 'node' app starts silently, no console notification)
+ 3. Point browser to localhost:8080
 Endpoint details are tabulated in the index ('/') route.
 
 Testing:
